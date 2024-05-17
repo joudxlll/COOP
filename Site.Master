@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Vault Keeper</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="/Styles/myWeb.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <form runat="server">
+        <div class="header">
+            <div class="title">
+                <h1>Vault Keeper</h1>
+            </div>
+            <div class="loginDisplay">
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        <ul class="menu">
+                            <li>
+                                <a href="~/Account/login.aspx" id="HeadLoginStatus" runat="server">Log In</a>
+                            </li>
+                        </ul>
+                    </AnonymousTemplate>
+
+                    <LoggedInTemplate>
+                        <ul class="menu">
+                            <li>Welcome <span class="bold">
+                                <asp:LoginName ID="HeadLoginName" runat="server" />
+                            </span>!
+                                <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/AboutUs/sendEmail.aspx" />
+                            </li>
+                        </ul>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                <Items>
+                    <asp:MenuItem NavigateUrl="~/AboutUs/sendEmail.aspx" Text="About Us" Value="" />
+                    <asp:MenuItem Text="Admin">
+                        <asp:MenuItem NavigateUrl="~/admin/ChangePassword.aspx" Text="ChangePassword" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/showRoles.aspx" Text="show Roles" Value="" />
+
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Subscriptions">
+                        <asp:MenuItem NavigateUrl="~/Subscriptions/viewSubscriptions.aspx" Text="View Subscriptions" Value="" />
+                        <asp:MenuItem NavigateUrl="~/Subscriptions/subscription.aspx" Text="Add New Subscriptions" Value="" />
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Coverages">
+                        <asp:MenuItem NavigateUrl="~/Coverages/viewCoverages.aspx" Text="View Coverages" Value="" />
+                        <asp:MenuItem NavigateUrl="~/Coverages/coverage.aspx" Text="Add New Coverage" Value="" />
+                    </asp:MenuItem>
+                </Items>
+            </asp:Menu>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Vault Keeper</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
